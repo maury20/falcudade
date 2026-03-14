@@ -1,5 +1,6 @@
 
 <html lang="pt-BR">
+
 <head>
 
 <meta charset="UTF-8">
@@ -9,12 +10,26 @@
 
 <script src="https://cdn.tailwindcss.com"></script>
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
 <style>
+
 body{
 background:#0f172a;
 color:white;
-font-family:Arial, Helvetica, sans-serif;
+font-family:'Inter',sans-serif;
 }
+
+h1{
+font-family:'Playfair Display',serif;
+letter-spacing:1px;
+}
+
+.table-card{
+background:#1e293b;
+border:1px solid #334155;
+}
+
 </style>
 
 </head>
@@ -23,23 +38,24 @@ font-family:Arial, Helvetica, sans-serif;
 
 <div class="max-w-5xl mx-auto">
 
-<h1 class="text-3xl font-bold mb-2">
+<h1 class="text-4xl md:text-5xl font-bold mb-2">
 Cronograma de Apresentações
 </h1>
 
-<p class="text-gray-400 mb-6">
+<p class="text-gray-400 mb-8">
 Seminário Acadêmico 2026
 </p>
 
-<div class="flex gap-3 mb-6">
+
+<div class="flex flex-col md:flex-row gap-4 mb-6">
 
 <input
 id="search"
-placeholder="Pesquisar equipe..."
-class="flex-1 p-2 rounded bg-gray-800 border border-gray-600"
+placeholder="Pesquisar equipe ou tema..."
+class="flex-1 p-3 rounded bg-slate-800 border border-slate-600"
 >
 
-<select id="filterDay" class="p-2 rounded bg-gray-800">
+<select id="filterDay" class="p-3 rounded bg-slate-800 border border-slate-600">
 
 <option value="0">Todos</option>
 <option value="1">Dia 1</option>
@@ -49,7 +65,7 @@ class="flex-1 p-2 rounded bg-gray-800 border border-gray-600"
 
 <button
 onclick="openAddModal()"
-class="bg-indigo-600 px-4 py-2 rounded"
+class="bg-indigo-600 px-5 py-3 rounded hover:bg-indigo-700 transition"
 >
 
 Adicionar Equipe
@@ -58,21 +74,28 @@ Adicionar Equipe
 
 </div>
 
-<div class="mb-3 text-gray-400">
-Total: <span id="teamCount">0</span>
+
+<div class="mb-4 text-gray-400">
+Total de equipes: <span id="teamCount">0</span>
 </div>
 
 
-<table class="w-full bg-slate-800 rounded overflow-hidden">
 
-<thead class="bg-indigo-600">
+<div class="table-card rounded-xl overflow-hidden">
+
+<table class="w-full text-sm md:text-base">
+
+<thead class="bg-indigo-600/20">
 
 <tr>
 
-<th class="p-3 text-left">Equipe</th>
-<th class="p-3 text-left">Tema</th>
-<th class="p-3 text-center">Dia</th>
-<th class="p-3 text-center">Ações</th>
+<th class="p-4 text-left font-semibold tracking-wide">Equipe</th>
+
+<th class="p-4 text-left font-semibold tracking-wide">Tema</th>
+
+<th class="p-4 text-center font-semibold tracking-wide">Dia</th>
+
+<th class="p-4 text-center font-semibold tracking-wide">Ações</th>
 
 </tr>
 
@@ -84,6 +107,8 @@ Total: <span id="teamCount">0</span>
 
 </div>
 
+</div>
+
 
 <!-- MODAL -->
 
@@ -92,15 +117,28 @@ id="formModal"
 class="fixed inset-0 bg-black/60 hidden items-center justify-center"
 >
 
-<div class="bg-slate-800 p-6 rounded w-96">
+<div class="bg-slate-800 p-6 rounded-xl w-96">
 
-<h2 class="text-xl mb-4">Equipe</h2>
+<h2 class="text-xl mb-4 font-semibold">
+Equipe
+</h2>
 
-<input id="teamName" placeholder="Nome" class="w-full mb-2 p-2 bg-slate-700 rounded">
+<input
+id="teamName"
+placeholder="Nome da equipe"
+class="w-full mb-3 p-3 bg-slate-700 rounded"
+>
 
-<input id="teamTopic" placeholder="Tema" class="w-full mb-2 p-2 bg-slate-700 rounded">
+<input
+id="teamTopic"
+placeholder="Tema do trabalho"
+class="w-full mb-3 p-3 bg-slate-700 rounded"
+>
 
-<select id="teamDay" class="w-full mb-4 p-2 bg-slate-700 rounded">
+<select
+id="teamDay"
+class="w-full mb-4 p-3 bg-slate-700 rounded"
+>
 
 <option value="1">Dia 1</option>
 <option value="2">Dia 2</option>
@@ -109,12 +147,22 @@ class="fixed inset-0 bg-black/60 hidden items-center justify-center"
 
 <div class="flex justify-end gap-2">
 
-<button onclick="closeForm()" class="bg-gray-600 px-3 py-1 rounded">
+<button
+onclick="closeForm()"
+class="bg-gray-600 px-4 py-2 rounded"
+>
+
 Cancelar
+
 </button>
 
-<button onclick="saveTeam()" class="bg-indigo-600 px-3 py-1 rounded">
+<button
+onclick="saveTeam()"
+class="bg-indigo-600 px-4 py-2 rounded"
+>
+
 Salvar
+
 </button>
 
 </div>
@@ -122,62 +170,72 @@ Salvar
 </div>
 
 </div>
+
 
 
 <script>
 
 let teams = [
-{ id:1,name:"Equipe 1",topic:"Inteligência Artificial",day:1 },
-{ id:2,name:"Equipe 2",topic:"Energias Renováveis",day:1 },
-{ id:3,name:"Equipe 3",topic:"Cibersegurança",day:1 },
-{ id:4,name:"Equipe 4",topic:"Realidade Virtual",day:1 },
-{ id:5,name:"Equipe 5",topic:"Biotecnologia",day:2 },
+
+{ id:1,name:"Equipe 1",topic:"Inteligência Artificial na Educação",day:1 },
+{ id:2,name:"Equipe 2",topic:"Sustentabilidade e Energias Renováveis",day:1 },
+{ id:3,name:"Equipe 3",topic:"Cibersegurança e Proteção de Dados",day:1 },
+{ id:4,name:"Equipe 4",topic:"Realidade Virtual e Aumentada",day:1 },
+{ id:5,name:"Equipe 5",topic:"Biotecnologia e Saúde",day:2 },
 { id:6,name:"Equipe 6",topic:"Internet das Coisas",day:2 },
-{ id:7,name:"Equipe 7",topic:"Blockchain",day:2 },
+{ id:7,name:"Equipe 7",topic:"Blockchain e Criptomoedas",day:2 },
 { id:8,name:"Equipe 8",topic:"Computação em Nuvem",day:2 }
+
 ]
 
-let editId = null
+let editId=null
+
 
 
 function render(){
 
-const body = document.getElementById("tableBody")
+const body=document.getElementById("tableBody")
 
-body.innerHTML = ""
+body.innerHTML=""
 
-const search = document.getElementById("search").value.toLowerCase()
+const search=document.getElementById("search").value.toLowerCase()
 
-const filterDay = Number(document.getElementById("filterDay").value)
+const filterDay=Number(document.getElementById("filterDay").value)
 
-const filtered = teams.filter(team =>
 
-(team.name.toLowerCase().includes(search) ||
-team.topic.toLowerCase().includes(search))
 
-&& (filterDay === 0 || team.day === filterDay)
+const filtered=teams.filter(team=>
+
+(team.name.toLowerCase().includes(search)
+|| team.topic.toLowerCase().includes(search))
+
+&& (filterDay===0 || team.day===filterDay)
 
 )
 
-document.getElementById("teamCount").innerText = filtered.length
+document.getElementById("teamCount").innerText=filtered.length
 
-filtered.forEach(team => {
 
-const row = document.createElement("tr")
 
-row.className = "border-t border-gray-700 hover:bg-slate-700"
+filtered.forEach(team=>{
 
-row.innerHTML = `
+const row=document.createElement("tr")
 
-<td class="p-3">${team.name}</td>
+row.className="border-t border-slate-700 hover:bg-slate-700 transition"
 
-<td class="p-3">${team.topic}</td>
 
-<td class="p-3 text-center">Dia ${team.day}</td>
 
-<td class="p-3 text-center">
+row.innerHTML=`
 
-<button onclick="editTeam(${team.id})" class="text-yellow-400 mr-2">
+<td class="p-4">${team.name}</td>
+
+<td class="p-4">${team.topic}</td>
+
+<td class="p-4 text-center">Dia ${team.day}</td>
+
+<td class="p-4 text-center">
+
+<button onclick="editTeam(${team.id})" class="text-yellow-400 mr-3">
 Editar
 </button>
 
@@ -196,17 +254,19 @@ body.appendChild(row)
 }
 
 
+
 function openAddModal(){
 
-editId = null
+editId=null
 
-document.getElementById("teamName").value = ""
-document.getElementById("teamTopic").value = ""
+document.getElementById("teamName").value=""
+document.getElementById("teamTopic").value=""
 
 document.getElementById("formModal").classList.remove("hidden")
 document.getElementById("formModal").classList.add("flex")
 
 }
+
 
 
 function closeForm(){
@@ -216,25 +276,30 @@ document.getElementById("formModal").classList.add("hidden")
 }
 
 
+
 function saveTeam(){
 
-const name = document.getElementById("teamName").value
-const topic = document.getElementById("teamTopic").value
-const day = Number(document.getElementById("teamDay").value)
+const name=document.getElementById("teamName").value
+
+const topic=document.getElementById("teamTopic").value
+
+const day=Number(document.getElementById("teamDay").value)
+
+
 
 if(editId){
 
-const team = teams.find(t => t.id === editId)
+const team=teams.find(t=>t.id===editId)
 
-team.name = name
-team.topic = topic
-team.day = day
+team.name=name
+team.topic=topic
+team.day=day
 
 }else{
 
 teams.push({
 
-id: Date.now(),
+id:Date.now(),
 name,
 topic,
 day
@@ -243,6 +308,8 @@ day
 
 }
 
+
+
 closeForm()
 
 render()
@@ -250,15 +317,20 @@ render()
 }
 
 
+
 function editTeam(id){
 
-const team = teams.find(t => t.id === id)
+const team=teams.find(t=>t.id===id)
 
-editId = id
+editId=id
 
-document.getElementById("teamName").value = team.name
-document.getElementById("teamTopic").value = team.topic
-document.getElementById("teamDay").value = team.day
+document.getElementById("teamName").value=team.name
+
+document.getElementById("teamTopic").value=team.topic
+
+document.getElementById("teamDay").value=team.day
+
+
 
 document.getElementById("formModal").classList.remove("hidden")
 document.getElementById("formModal").classList.add("flex")
@@ -266,17 +338,22 @@ document.getElementById("formModal").classList.add("flex")
 }
 
 
+
 function deleteTeam(id){
 
-teams = teams.filter(t => t.id !== id)
+teams=teams.filter(t=>t.id!==id)
 
 render()
 
 }
 
 
-document.getElementById("search").addEventListener("input", render)
-document.getElementById("filterDay").addEventListener("change", render)
+
+document.getElementById("search").addEventListener("input",render)
+
+document.getElementById("filterDay").addEventListener("change",render)
+
+
 
 render()
 
